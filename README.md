@@ -1,2 +1,2 @@
-# gerRotina
-Gerenciador de rotinas trab
+# Projeto Avançada
+Gerenciamento e armazenamento de informações 
