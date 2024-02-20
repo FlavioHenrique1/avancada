@@ -16,6 +16,7 @@ class ClassValidate{
     private $login;
     private $session;
     private $mail;
+    private $tentativas;
 
     public function __construct()
     {
@@ -53,25 +54,24 @@ class ClassValidate{
         }
     }
 
-    #Validação se o dado é um email
-    public function validateEmail($par)
+    // #Validação se o dado é um email
+    // public function validateEmail($par)
+    // {
+    //     if(filter_var($par, FILTER_VALIDATE_EMAIL)){
+    //         return true;
+    //     }else{
+    //         $this->setErro("Email inválido!");
+    //         return false;
+    //     }
+    // }
+    #Validar se o prontuario existe no banco de dados (action null para cadastro)
+    public function validateIssetprontuario($prontuario,$action=null)
     {
-        if(filter_var($par, FILTER_VALIDATE_EMAIL)){
-            return true;
-        }else{
-            $this->setErro("Email inválido!");
-            return false;
-        }
-    }
-
-    #Validar se o email existe no banco de dados (action null para cadastro)
-    public function validateIssetEmail($email,$action=null)
-    {
-        $b=$this->cadastro->getIssetEmail($email);
+        $b=$this->cadastro->getIssetProntuario($prontuario);
 
         if($action==null){
             if($b > 0){
-                $this->setErro("Email já cadastrado!");
+                $this->setErro("Prontuário já cadastrado!");
                 return false;
             }else{
                 return true;
@@ -80,12 +80,11 @@ class ClassValidate{
             if($b > 0){
                 return true;
             }else{
-                $this->setErro("Email não cadastrado!");
+                $this->setErro("Prontuário não cadastrado!");
                 return false;
             }
         }
     }
-
 
     #Validação se o dado é uma data
     public function validateData($par)
@@ -162,15 +161,14 @@ class ClassValidate{
     }
 
     #Verificação da senha digitada com o hash no banco de dados
-    public function validateSenha($email,$senha)
+    public function validateSenha($prontuario,$senha)
     {
-        if($this->password->verifyHash($email,$senha)){
+        if($this->password->verifyHash($prontuario,$senha)){
             return true;
         }else{
             $this->setErro("Usuário ou Senha Inválidos!");
             return false;
         }
-    
     }
 
     #Validação final do cadastro
@@ -182,16 +180,16 @@ class ClassValidate{
                 "erros"=>$this->getErro()
             ];
         }else{
-            $this->mail->sendMail(
-                $arrVar['email'],
-                $arrVar['nome'],
-                $arrVar['token'],
-                "confirmação de cadastro",
-                "
-                <strong>Cadastro do Site</strong><br>".
-                $arrVar['nome']."<br>Confirme seu email <a href='".DIRPAGE."controllers/controllerConfirmacao/{$arrVar['email']}/{$arrVar['token']}'>Clicando Aqui</a>
-                "
-            );
+            // $this->mail->sendMail(
+            //     $arrVar['email'],
+            //     $arrVar['nome'],
+            //     $arrVar['token'],
+            //     "confirmação de cadastro",
+            //     "
+            //     <strong>Cadastro do Site</strong><br>".
+            //     $arrVar['nome']."<br>Confirme seu email <a href='".DIRPAGE."controllers/controllerConfirmacao/{$arrVar['email']}/{$arrVar['token']}'>Clicando Aqui</a>
+            //     "
+            // );
             $arrResponse=[
                 "retorno"=>"success",
                 "erros"=>null
@@ -231,7 +229,7 @@ class ClassValidate{
     }
 
     #Validação final do login
-    public function validateFinalLogin($email)
+    public function validateFinalLogin($prontuario)
     {
         if(count($this->getErro()) >0){
             $this->login->insertAttempt();
@@ -243,11 +241,11 @@ class ClassValidate{
         }else{
             $arrResponse=[
                 "retorno"=>"success",
-                "page"=>'atividades',
+                "page"=>'home',
                 "tentativas"=>$this->tentativas
             ];
             $this->login->deleteAttempt();
-            $this->session->setSessions($email);
+            $this->session->setSessions($prontuario);
         }
         return json_encode($arrResponse);
     }
@@ -261,21 +259,21 @@ class ClassValidate{
                 "erros"=>$this->getErro()
             ];
         }else{
-            $this->mail->sendMail(
-                $arrVar['email'],
-                $arrVar['nome'],
-                $arrVar['token'],
-                "Link para Confirmação de Senha",
-                "
-                <strong>Redefinação da Senha</strong><br>
-                Redefina sua senha <a href='".DIRPAGE."redefinicaoSenha/{$arrVar['email']}/{$arrVar['token']}'>clicando aqui</a>.
-                "
-            );
+            // $this->mail->sendMail(
+            //     $arrVar['email'],
+            //     $arrVar['nome'],
+            //     $arrVar['token'],
+            //     "Link para Confirmação de Senha",
+            //     "
+            //     <strong>Redefinação da Senha</strong><br>
+            //     Redefina sua senha <a href='".DIRPAGE."redefinicaoSenha/{$arrVar['email']}/{$arrVar['token']}'>clicando aqui</a>.
+            //     "
+            // );
             $arrResponse=[
                 "retorno"=>"success",
                 "erros"=>null
             ];
-            $this->cadastro->insConfirmation($arrVar);
+            // $this->cadastro->insConfirmation($arrVar);
         }
         return json_encode($arrResponse);
     }

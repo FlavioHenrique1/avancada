@@ -1,6 +1,6 @@
 <?php 
 #Caminhos absolutos
-$pastaInterna="Qualidade/";
+$pastaInterna="Avancada/";
 define('DIRPAGE',"http://{$_SERVER['HTTP_HOST']}/{$pastaInterna}");
 
 (substr($_SERVER['DOCUMENT_ROOT'],-1)=='/')?$barra="":$barra="/";
@@ -14,7 +14,7 @@ define('DIRCONT',DIRPAGE.'controllers/');
 
 #Acesso ao BD
 define('HOST',"localhost");
-define('BD',"sistemaQuali");
+define('BD',"avancada");
 define('USER',"root");
 define('PASS',"");
 

@@ -1,0 +1,41 @@
+.divTabela{
+    margin-top: 5%;
+    padding: 20px;
+    background-color: rgba(213, 213, 213, 0.2);
+    height: auto;
+    border-radius: 4px;
+    align-items: center;
+}
+.op{
+    max-width: 1px !important;
+}
+td , th{
+    padding: 5px;
+    text-align:center;     
+}
+.imgTd{
+    cursor: pointer;
+}
+.divTab{
+    margin-top: 10px;
+}
+.Marcar{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 5px;
+    padding: 2px;
+}
+#flexCheckDefault{
+    margin-right: 10px;
+}
+.BtnLimparTodos{
+    padding: 3px;
+    margin-left: 10px;
+    border-radius: 5px;
+    color: #fff;
+    background: red;
+    cursor: pointer;
+}

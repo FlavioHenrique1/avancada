@@ -18,7 +18,7 @@ class ClassSessions{
             ini_set("session.use_only_cookies",1);
             #ini_set("session.cookie_domain",DOMAIN);
             ini_set("session.cookie_httponly",1);
-            if(DOMAIN != "localhost"){ini_set("session.cookie_secure",1);}
+            #if(DOMAIN != "localhost"){ini_set("session.cookie_secure",1);}
             /*Criptografia das nossas sessions*/
             ini_set("session.entropy_length",512);
             ini_set("session.entropy_file",'/dev/urandom');
@@ -47,9 +47,9 @@ class ClassSessions{
     #Verificar a integridade da sessão
     public function verifyIdSessions()
     {
+        
         if(!isset($_SESSION['canary'])){
             $this->setSessionCanary();
-            
         }
     
         if($_SESSION['canary']['IP'] !== TraitGetIp::getUserIp()){
@@ -64,14 +64,14 @@ class ClassSessions{
     }
 
     #Setar as sessões do nosso sistema
-    public function setSessions($email)
+    public function setSessions($prontuario)
     {
         $this->verifyIdSessions();
         $_SESSION["login"]=true;
         $_SESSION["time"]=time();
-        $_SESSION["name"]=$this->login->getDataUser($email)['data']['nome'];
-        $_SESSION["email"]=$this->login->getDataUser($email)['data']['email'];
-        $_SESSION["permition"]=$this->login->getDataUser($email)['data']['permissoes'];
+        $_SESSION["name"]=$this->login->getDataUser($prontuario)['data']['nome'];
+        $_SESSION["permition"]=$this->login->getDataUser($prontuario)['data']['permition'];
+        $_SESSION["prontuario"]=$this->login->getDataUser($prontuario)['data']['prontuario'];
     }
 
     #Validar as páginas internas do sistema

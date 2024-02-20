@@ -13,38 +13,25 @@ class ClassCadastro extends ClassCrud{
                 0,
                 $arrVar['nome'],
                 $arrVar['prontuario'],
-                $arrVar['email'],
                 $arrVar['hashSenha'],
                 $arrVar['dataNascimento'],
                 $arrVar['dataCreate'],
                 'user',
-                'confirmation'
+                'ativo',
+                $arrVar['dataCreate']
             )
         );
-        $this->insConfirmation($arrVar);
     }
 
-    #Inserção de confirmação
-    public function insConfirmation($arrVar){
-        $this->insertDB(
-            "confirmation",
-            "?,?,?",
-            array(
-                0,
-                $arrVar['email'],
-                $arrVar['token']
-            )
-        );
-    }
     #Veriricar se já existe o mesmo email cadastro no db
-    public function getIssetEmail($email)
+    public function getIssetProntuario($prontuario)
     {
         $b=$this->selectDB(
             "*",
             "users",
-            "where email=?",
+            "where prontuario=?",
             array(
-                $email
+                $prontuario
             )
         );
 
@@ -87,14 +74,14 @@ class ClassCadastro extends ClassCrud{
     }
 
     #Verificar a confirmação de senha
-    public function confirmationSen($email,$token,$hashSenha)
+    public function confirmationPront($prontuario,$token,$hashSenha)
     {
         $b=$this->selectDB(
             "*",
             "confirmation",
-            "where email=? and token=?",
+            "where prontuario=? and token=?",
             array(
-                $email,
+                $prontuario,
                 $token
             )
         );
@@ -103,17 +90,17 @@ class ClassCadastro extends ClassCrud{
         if($r >0){
             $this->deleteDB(
                 "confirmation",
-                "email=?",
-                array($email)
+                "prontuario=?",
+                array($prontuario)
             );
 
             $this->updateDB(
                 "users",
                 "senha=?",
-                "email=?",
+                "prontuario=?",
                 array(
                     $hashSenha,
-                    $email
+                    $prontuario
                 )
             );
             return true;
@@ -122,6 +109,35 @@ class ClassCadastro extends ClassCrud{
         }
     }
 
+    #Verificar a confirmação de senha
+    public function alterarSenha($prontuario,$hashSenha,$dataN)
+    {
+        $b=$this->selectDB(
+            "*",
+            "users",
+            "where prontuario=? and dataNascimento=?",
+            array(
+                $prontuario,
+                $dataN
+            )
+        );
+        $r=$b->rowCount();
+            if($r >0){
+                $this->updateDB(
+                    "users",
+                    "senha=?",
+                    "prontuario=?",
+                array(
+                    $hashSenha,
+                    $prontuario
+                    )
+                );
+                return true;
+            }else{
+                return false;
+            }
+
+    }
 
 
 }

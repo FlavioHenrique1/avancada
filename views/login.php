@@ -5,16 +5,16 @@
     <form name="formLogin" id="formLogin" action="<?php echo DIRCONT.'controllerLogin';?>" method="post">
         <div class="login">
             <div class="loginLogomarca float w100 center">
-                <img src="<?php #echo DIRIMG.'logoExemplo.jpg';?>" alt="Logomarca">
+                <img src="<?php echo DIRIMG.'logo-americanassa-preto.png';?>" alt="Logomarca">
             </div>
             <div class="resultadoForm float w100 center"></div>
             <div class="loginFormulario float w100">
-                <input class="float w100 h40 inputform" type="email" name="email" id="email" placeholder="Email" required><br>
+                <input class="float w100 h40 inputform numm" type="number" name="prontuario" id="prontuario" placeholder="Prontuário" required autofocus><br>
                 <input class="float w100 h40 inputform" type="password" name="senha" id="senha" placeholder="Senha" required>
                 <input class="float h40 center inputSubmit" type="submit" value="Entrar">
-                <div class="loginTextos float center"><a href="<?php echo DIRPAGE.'esqueci-minha-senha';?>">Esqueci minha senha</a></div>
+                <div class="loginTextos float center"><a href="<?php echo DIRPAGE.'redefinicaoSenha';?>">Esqueci minha senha</a></div>
+                <div class="loginTextos float"><span class="loginspan"> Não tem conta ?</span> <a href="<?php echo DIRPAGE.'cadastro';?>"><span class="spanCad">cadastre-se</span></a></div>
             </div>
-      
         </div>
     </form>
 

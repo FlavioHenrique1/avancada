@@ -18,14 +18,14 @@ class ClassLogin extends ClassCrud{
 
 
     #Retorna os dados do usuário
-    public function getDataUser($email)
+    public function getDataUser($prontuario)
     {
         $b=$this->selectDB(
             "*",
             "users",
-            "where email=?",
+            "where prontuario=?",
             array(
-                $email
+                $prontuario
             )
         );
         $f=$b->fetch(\PDO::FETCH_ASSOC);

@@ -1,6 +1,15 @@
 /*sistema*/
 *{margin: 0; padding: 0;box-sizing: border-box;} */
-a{text-decoration: none; color: #333;}
+a{text-decoration: none !important ; color: #333 !important;}
+a{text-decoration: none; color: #0b0230;}
+/* Configurando o span do cadastro */
+.spanCad{
+    color: #0320a2;
+}
+.spanCad:hover{
+    color: #1d46fc;
+    font-size: 18px;
+}
 
 /*classes auxiliares*/
 .float{float: left;}
@@ -15,17 +24,18 @@ a{text-decoration: none; color: #333;}
 
 .inputSubmit{width: 30%;background: #025158;font-weight: bold;color: #fff;border: none;border-radius: 2px;cursor: pointer;}
 
-.inputSubmit:hover{opacity: 0.8;}
-
-.fundo{position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: url('../../img/imagemFundo.jpg') center center no-repeat;background-size: cover;}
-
-.login{position: absolute;width: 30%; top: 50%;left: 50%;margin-right: -50%;transform: translate(-50%,-50%);background: #fff;padding: 30px;}
+.numm::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+/* .fundo{position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: url('../../img/imagemFundo.jpg') center center no-repeat;background-size: cover;} */
+ .fundo{position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: url('../../img/imgFund.jpg') center center no-repeat;background-size: cover;} 
+.login{position: absolute;width: 30%; top: 50%;left: 50%;margin-right: -50%;transform: translate(-50%,-50%);background: #faf8f8;padding: 30px; border-radius: 5px;}
 
 .loginTextos{width: 70%;font-weight: bold;line-height: 40px;}
 .cadastro{float: left;width: 60%;margin: 15px 20%;}
 .topFaixa{height: 50px;background: #025158;font-weight: bold;color: #fff;line-height: 50px;}
 .resultadoForm{margin-top: 20px; font-weight: bold;color: red;line-height: 20px;}
-.imgTabela{width: 30px; height: 25px;}
+.imgTabela{width: 30px; height: 25px; cursor: pointer;}
 .imgTabela:hover{opacity: 0.8; height: 30px;width: 35px;} 
 .form{
     width: 50%;
@@ -56,6 +66,10 @@ a{text-decoration: none; color: #333;}
 .user_img{
     width: 35px;
     height: 35px;
+}
+.loginspan{
+    color: rgb(126, 124, 124);
+    font-size: 13px;
 }
 
 @media screen and (max-width: 480px){

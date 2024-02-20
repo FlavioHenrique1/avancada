@@ -19,10 +19,11 @@ class ClassPassword{
     }
     
     #Verificar se o hash da senha está correto
-    public function verifyHash($email,$senha)
+    public function verifyHash($prontuario,$senha)
     {
-        $hashDb=$this->db->getDataUser($email);
+        $hashDb=$this->db->getDataUser($prontuario);
         return password_verify($senha,$hashDb["data"]["senha"]);
     }
+    
 
 }
